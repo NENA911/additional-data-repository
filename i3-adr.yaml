@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: IS-ADR Service
+  version: "1.0"
+servers:
+  - url: http://localhost/Adr/v1
+paths:
+  /AdditionalData:
+    get:
+      tags:
+        - RetrieveCallerAdditionalData
+      summary: Retrieves Additional Data of the caller in XML format or a reference to the Additional Data. Provides ADR search capability by identity (Identity-Searchable).
+      operationId: RetrieveCallerAdditionalData
+      parameters:
+        - name: callerUri
+          in: query
+          description: Caller URI (taken from From or PAI)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Additional Data found
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AdditionalDataValue'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdditionalDataReference'
+        '307':
+          description: Temporary Redirect
+          headers:
+            Location:
+              description: Referral URI of ADR
+              schema:
+                type: string
+                format: uri
+        '404':
+          description: Not found
+        '454':
+          description: Unspecified Error
+  /Versions:
+    servers:
+      - url: https://api.example.com/Adr
+        description: Override base path for Versions query
+    get:
+      tags:
+        - RetrieveVersions
+      summary: Retrieves all supported versions, vendor parameter is optional.
+      operationId: RetrieveVersions
+      responses:
+        '200':
+          description: Versions found
+          content:
+            application/json:
+              schema:
+                $ref: 'i3-common.yaml#/components/schemas/VersionsArray'
+components:
+  schemas:
+    AdditionalDataValue:
+      type: string
+    AdditionalDataReference:
+      type: string
