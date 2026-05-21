@@ -20,7 +20,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Additional Data found
+          description: Additional Data Found
           content:
             application/xml:
               schema:
@@ -37,7 +37,7 @@ paths:
                 type: string
                 format: uri
         '404':
-          description: Not found
+          description: Not Found
         '454':
           description: Unspecified Error
   /Versions:
@@ -51,7 +51,7 @@ paths:
       operationId: RetrieveVersions
       responses:
         '200':
-          description: Versions found
+          description: Versions Found
           content:
             application/json:
               schema:
