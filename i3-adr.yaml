@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: IS-ADR Service
-  version: "1.0"
+  version: "1.0.1"
 servers:
   - url: http://localhost/Adr/v1
 paths:
@@ -42,7 +42,7 @@ paths:
           description: Unspecified Error
   /Versions:
     servers:
-      - url: https://api.example.com/Adr
+      - url: https://localhost/Adr
         description: Override base path for Versions query
     get:
       tags:
@@ -55,7 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'i3-common.yaml#/components/schemas/VersionsArray'
+                $ref: 'https://raw.githubusercontent.com/NENA911/i3-Common/refs/tags/v1.0.0/i3-common.yaml#/components/schemas/VersionsArray'
 components:
   schemas:
     AdditionalDataValue:
